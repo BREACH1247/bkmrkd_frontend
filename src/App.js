@@ -3,7 +3,7 @@ import Reference from './components/Reference/Reference'
 
 function App() {
   return (
-    <div>
+    <div className='h-screen bg-[#EDE5C9]'>
       <div>
         <Reference />
       </div>
