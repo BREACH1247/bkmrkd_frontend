@@ -1,16 +1,13 @@
 import './App.css'
-import Refer from './components/Ref'
+import Reference from './components/Reference/Reference'
 
 function App() {
   return (
-    <div><h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div>
       <div>
-        <Refer />
+        <Reference />
       </div>
     </div>
-
   )
 }
 

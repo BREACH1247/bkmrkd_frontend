@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Reference = () => {
+function Reference() {
 	return (
-		<div className="bg-black">
-			<p>Hello World</p>
+		<div>
+			<h1>Landing Page</h1>
 		</div>
 	)
 }
