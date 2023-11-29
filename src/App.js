@@ -1,15 +1,16 @@
+import React from 'react'
+import Landing from './pages/Landing'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
-import CardGrid from './components/CardGrid'
-import Reference from './components/Reference/Reference'
 
-function App() {
+const App = () => {
   return (
-    <div className='min-h-screen bg-[#EDE5C9]'>
-      <div>
-        <Reference />
-        <CardGrid/>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route exact path='/' element={<Landing />} />
+        <Route path='*' element={() => 'ERROR 404 NOT FOUND'} />
+      </Routes>
+    </Router>
   )
 }
 
