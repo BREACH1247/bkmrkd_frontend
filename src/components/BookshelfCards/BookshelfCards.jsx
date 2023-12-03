@@ -90,8 +90,8 @@ const BookshelfCards = () => {
 					key={stackIndex}
 					className="relative m-1" // Adjusted margin
 					style={{
-						width: '800px',
-						height: '400px',
+						width: '500px',
+						height: '200px',
 						transition: 'transform .2s',
 						transform:
 							hoveredCard.stackIndex === stackIndex ? 'scale(1.1)' : 'scale(1)',
