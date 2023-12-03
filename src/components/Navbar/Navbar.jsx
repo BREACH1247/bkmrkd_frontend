@@ -141,7 +141,7 @@ const Navbar = ({name}) => {
           <a href="#" className="ml-2  hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer">
             <img src={note} alt="" className="h-6 w-6" />
           </a>
-          <a href="#" className="ml-2 hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer">
+          <a href="/bookshelf" className="ml-2 hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer">
             <img src={library} alt="" className="h-6 w-6" />
           </a>
 

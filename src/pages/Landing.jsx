@@ -4,7 +4,9 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import CardGrid from '../components/CardGrid'
+
 import Navbar from '../components/Navbar/Navbar'
+
 let data = [
 	{
 		id: 1,
@@ -60,12 +62,14 @@ const Landing = () => {
 	return (
 		<div>
 			<Navbar />
+			
       <div className="container mx-auto">
         <Slider {...carouselConfig}>
           {data.map((item) => (
             <Bookshelf key={item.id} details={item} />
           ))}
         </Slider>
+		
       </div>
 		<CardGrid />
 		</div>
