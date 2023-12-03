@@ -3,12 +3,14 @@ import add from '../assets/add.png'
 import cluster from '../assets/cluster.png'
 import search from '../assets/search.png'
 import hand from '../assets/hand.png'
+import Navbar from '../components/Navbar/Navbar'
 import BookshelfCards from '../components/BookshelfCards/BookshelfCards'
 
 const Bookshelf = () => {
 	return (
 		<div>
-			<div>
+			<div className="container max-w-7xl mx-auto">
+				<Navbar />
 				<div className="flex justify-center">
 					<img src={hand} alt="hand"></img>
 				</div>

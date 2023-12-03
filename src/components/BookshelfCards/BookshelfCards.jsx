@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 const BookshelfCards = () => {
-	const [hoveredCard, setHoveredCard] = useState({})
 
 	const stacks = [
 		[
@@ -80,25 +79,78 @@ const BookshelfCards = () => {
 					'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781668016138/holly-9781668016138_hr.jpg',
 			},
 		],
+		[
+			{
+				imageUrl:
+					'https://www.designforwriters.com/wp-content/uploads/2017/10/design-for-writers-book-cover-tf-2-a-million-to-one.jpg',
+			},
+			{ imageUrl: 'https://i.huffpost.com/gen/1039678/original.jpg' },
+			{
+				imageUrl:
+					'https://cdn.rickriordan.com/wp-content/uploads/2023/02/11223837/PERCY-CHALICE-FINALcover2.21-final.jpg',
+			},
+			{
+				imageUrl:
+					'https://marketplace.canva.com/EAD7YHrjZYY/1/0/1003w/canva-blue-illustrated-stars-children%27s-book-cover-haFtaSNXXF4.jpg',
+			},
+			{
+				imageUrl:
+					'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781668016138/holly-9781668016138_hr.jpg',
+			},
+		],
+		[
+			{
+				imageUrl:
+					'https://www.designforwriters.com/wp-content/uploads/2017/10/design-for-writers-book-cover-tf-2-a-million-to-one.jpg',
+			},
+			{ imageUrl: 'https://i.huffpost.com/gen/1039678/original.jpg' },
+			{
+				imageUrl:
+					'https://cdn.rickriordan.com/wp-content/uploads/2023/02/11223837/PERCY-CHALICE-FINALcover2.21-final.jpg',
+			},
+			{
+				imageUrl:
+					'https://marketplace.canva.com/EAD7YHrjZYY/1/0/1003w/canva-blue-illustrated-stars-children%27s-book-cover-haFtaSNXXF4.jpg',
+			},
+			{
+				imageUrl:
+					'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781668016138/holly-9781668016138_hr.jpg',
+			},
+		],
 		// Add more stacks as needed
 	]
-
+	const StackText = ({ title, books }) => (
+		<div
+			style={{
+				position: 'absolute',
+				top: '175px',
+				left: '15px',
+				textAlign: 'left',
+				
+			}}
+		>
+			<h2 className="text-sm font-medium" style={{ fontSize: '16px' }}>
+				{title}
+			</h2>
+			<p className="text-xs text-gray-500" style={{ fontSize: '14px' }}>
+				{books} books
+			</p>
+		</div>
+	)
 	return (
-		<div className="flex flex-wrap justify-center md:px-32">
+		<div className="max-w-full flex flex-wrap items-start justify-between px-5.7 mt-8 mb-6">
 			{stacks.map((cards, stackIndex) => (
 				<div
 					key={stackIndex}
-					className="relative m-1" // Adjusted margin
+					className="relative mr-2 mb-4" 
 					style={{
-						width: '500px',
+						width: '30%',
 						height: '200px',
-						transition: 'transform .2s',
-						transform:
-							hoveredCard.stackIndex === stackIndex ? 'scale(1.1)' : 'scale(1)',
 					}}
-					onMouseEnter={() => setHoveredCard({ stackIndex })}
-					onMouseLeave={() => setHoveredCard({})}
-				>
+						>
+
+						<StackText title="Comfort Reads" books={15} />
+				
 					<div style={{ position: 'relative' }}>
 						{cards.map((card, cardIndex) => (
 							<a href="#" key={cardIndex} style={{ textDecoration: 'none' }}>
