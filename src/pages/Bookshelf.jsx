@@ -4,12 +4,13 @@ import cluster from "../assets/cluster.png";
 import search from "../assets/search.png";
 import hand from "../assets/hand.png";
 import Bscards from '../components/Bscards/Bscards'
-
+import Navbar from '../components/Navbar/Navbar'
 
 const Bookshelf = () => {
   return (
+    
     <div>
-    <div>
+      <Navbar />
         <div className='flex justify-center'>
             <img src={hand} alt="hand"></img>
         </div>
@@ -26,7 +27,7 @@ const Bookshelf = () => {
         <Bscards />
        
     </div>
-    </div>
+    
   )
 }
 

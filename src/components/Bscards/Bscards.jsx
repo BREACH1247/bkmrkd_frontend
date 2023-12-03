@@ -42,8 +42,8 @@ const Bscards = () => {
           key={stackIndex}
           className="relative m-1" // Adjusted margin
           style={{
-            width: '800px',
-            height: '400px',
+            width: '500px',
+            height: '200px',
             transition: "transform .2s",
             transform: hoveredCard.stackIndex === stackIndex ? "scale(1.1)" : "scale(1)",
           }}
@@ -60,6 +60,7 @@ const Bscards = () => {
 <div
   className="max-w-xs"
   style={{
+
     position: "absolute",
     top: '0',
     width: "140px",
@@ -86,6 +87,18 @@ const Bscards = () => {
   </div>
 )}
 {stackIndex === 1 && (
+  <div style={{ position: 'absolute', top: '175px', left: '15px', textAlign: 'left', zIndex: 999 }}>
+    <h2 className="text-sm font-medium" style={{ fontSize: "16px" }}>Comfort Reads</h2>
+    <p className="text-xs text-gray-500" style={{ fontSize: "14px" }}>15 books</p>
+  </div>
+)}
+{stackIndex === 2 && (
+  <div style={{ position: 'absolute', top: '175px', left: '15px', textAlign: 'left', zIndex: 999 }}>
+    <h2 className="text-sm font-medium" style={{ fontSize: "16px" }}>Comfort Reads</h2>
+    <p className="text-xs text-gray-500" style={{ fontSize: "14px" }}>15 books</p>
+  </div>
+)}
+{stackIndex === 3 && (
   <div style={{ position: 'absolute', top: '175px', left: '15px', textAlign: 'left', zIndex: 999 }}>
     <h2 className="text-sm font-medium" style={{ fontSize: "16px" }}>Comfort Reads</h2>
     <p className="text-xs text-gray-500" style={{ fontSize: "14px" }}>15 books</p>
