@@ -1,9 +1,9 @@
 import React from 'react'
+import CardGrid from '../components/CardGrid'
 import Bookshelf from '../components/Bookshelf/Bookshelf'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import CardGrid from '../components/CardGrid'
 
 let data = [
 	{
@@ -54,19 +54,25 @@ const carouselConfig = {
 	speed: 500,
 	slidesToShow: 5,
 	slidesToScroll: 1,
+	centerMode: true,
+	mobileFirst: true,
+	variableWidth: true,
 }
 
 const Landing = () => {
 	return (
 		<div>
-		<div className="container mx-auto">
-			<Slider {...carouselConfig}>
-				{data.map((item) => (
-					<Bookshelf key={item.id} details={item} />
-				))}
-			</Slider>
-		</div>
-		<CardGrid/>
+			<div className="container mx-auto">
+				<Slider {...carouselConfig}>
+					{data.map((item) => (
+						<Bookshelf key={item.id} details={item} />
+					))}
+				</Slider>
+
+				<div className="rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2.5px] mb-8 my-4"></div>
+
+				<CardGrid />
+			</div>
 		</div>
 	)
 }
