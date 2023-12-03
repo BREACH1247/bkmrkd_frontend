@@ -14,7 +14,19 @@ module.exports = {
         medium: 500,
         bold: 700,
       },
+      zIndex: {
+        '1': '1',
+        '2': '2',
+        '3': '3',
+        '4': '4',
+        '5': '5',
+      }
     },
+  },
+  variants: {
+    extend: {
+      zIndex: ['hover', 'active'],
+    }
   },
   plugins: [
     require('@tailwindcss/typography'),

@@ -2,6 +2,7 @@ import React from 'react'
 import CardGrid from '../components/CardGrid'
 import Bookshelf from '../components/Bookshelf/Bookshelf'
 import Slider from 'react-slick'
+import Navbar from '../components/Navbar/Navbar'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
@@ -61,18 +62,18 @@ const carouselConfig = {
 
 const Landing = () => {
 	return (
-		<div>
-			<div className="container mx-auto">
-				<Slider {...carouselConfig}>
-					{data.map((item) => (
-						<Bookshelf key={item.id} details={item} />
-					))}
-				</Slider>
+		<div className="container max-w-7xl mx-auto">
+			<Navbar />
 
-				<div className="rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2.5px] mb-8 my-4"></div>
+			<Slider {...carouselConfig}>
+				{data.map((item) => (
+					<Bookshelf key={item.id} details={item} />
+				))}
+			</Slider>
 
-				<CardGrid />
-			</div>
+			<div className="rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2.5px] mb-8 my-4"></div>
+
+			<CardGrid />
 		</div>
 	)
 }
