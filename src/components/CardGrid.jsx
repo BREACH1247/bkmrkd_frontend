@@ -66,7 +66,10 @@ const CardGrid = () => {
 	]
 
 	return (
-		<div className="flex flex-wrap justify-between px-0">
+		
+		<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
+			 
+
 			{cardsData.map((card, index) => (
 				<Card key={index} imageUrl={card.imageUrl} rating={card.rating} />
 			))}
