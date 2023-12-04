@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import lock from '../../assets/lock.png'
 
 const BookshelfCards = () => {
 
@@ -117,66 +118,93 @@ const BookshelfCards = () => {
 					'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781668016138/holly-9781668016138_hr.jpg',
 			},
 		],
-		// Add more stacks as needed
+		
 	]
-	const StackText = ({ title, books }) => (
-		<div
-			style={{
-				position: 'absolute',
-				top: '175px',
-				left: '15px',
-				textAlign: 'left',
-				
-			}}
-		>
-			<h2 className="text-sm font-medium" style={{ fontSize: '16px' }}>
-				{title}
-			</h2>
-			<p className="text-xs text-gray-500" style={{ fontSize: '14px' }}>
-				{books} books
-			</p>
+	const lockedContainers = [1, 4];
+	const stacksData = stacks.map((cards, index) => ({
+	  genre: `Genre ${index + 1}`,
+	  bookCount: 10,
+	  books: cards,
+	  isLocked: lockedContainers.includes(index),
+	}));
+  
+	const StackText = ({ genre, bookCount, isLocked }) => (
+	  <div
+		className="stack-text"
+		style={{
+		  position: 'absolute',
+		  top: '165px',
+		  textAlign: 'left',
+		  zIndex: 1,
+		  display: 'flex',
+		  alignItems: 'center',
+		  justifyContent: 'space-between',
+		  width: '100%', 
+		  paddingRight: '10px'
+		}}
+	  >
+		<div>
+		  <h2 className="text-sm font-medium" style={{ fontSize: '16px' }}>
+			{genre}
+		  </h2>
+		  <p className="text-xs text-gray-500" style={{ fontSize: '14px' }}>
+			{bookCount} books
+		  </p>
 		</div>
-	)
+		{isLocked && <img src={lock} alt="Locked" style={{ width: '15px', height: '15px'}} />} 
+	  </div>
+	);
+  
 	return (
-		<div className="max-w-full flex flex-wrap items-start justify-between px-5.7 mt-8 mb-6">
-			{stacks.map((cards, stackIndex) => (
-				<div
-					key={stackIndex}
-					className="relative mr-2 mb-4" 
+	  <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-10 gap-y-6">
+		{stacksData.map((stack, stackIndex) => (
+		  <a href="#" key={stackIndex} className="card-link" style={{ textDecoration: 'none' }}>
+			<div
+			  className="relative"
+			  style={{
+				width: '100%',
+				height: '204px',
+				position: 'relative',
+				cursor: 'pointer',
+				display: 'flex',
+				marginRight: '100px',
+			  }}
+			>
+			  <div style={{ position: 'relative' }}>
+				{stack.books.map((card, cardIndex) => (
+				  <div
+					className="max-w-xs"
+					key={cardIndex}
 					style={{
-						width: '30%',
-						height: '200px',
+					  position: 'absolute',
+					  top: '0',
+					  width: '120px',
+					  height: '160px',
+					  left: `${cardIndex * 70}px`,
+					  zIndex: 100 - cardIndex,
 					}}
-						>
-
-						<StackText title="Comfort Reads" books={15} />
-				
-					<div style={{ position: 'relative' }}>
-						{cards.map((card, cardIndex) => (
-							<a href="#" key={cardIndex} style={{ textDecoration: 'none' }}>
-								<div
-									className="max-w-xs"
-									style={{
-										position: 'absolute',
-										top: '0',
-										width: '140px',
-										height: '150px',
-										left: `${cardIndex * 70}px`,
-										zIndex: 100 - cardIndex,
-									}}
-								>
-									<div className="p-4">
-										<img
-											src={card.imageUrl}
-											alt="Card"
-											className="w-full h-full object-cover rounded-lg" // Adjusted border radius
-											style={{ width: '140px', height: '150px' }}
-										/>
-									</div>
-								</div>
-							</a>
-						))}
-						{stackIndex === 0 && (
+				  >
+					<div className="">
+					  <img
+						src={card.imageUrl}
+						alt="Card"
+						className="w-full h-full object-cover rounded-lg"
+						style={{ width: '120px', height: '160px' }}
+					  />
+					</div>
+				  </div>
+				))}
+			  </div>
+			  <StackText genre={stack.genre} bookCount={stack.bookCount} isLocked={stack.isLocked} />
+			</div>
+		  </a>
+		))}
+	  </div>
+	);
+  };
+  
+  export default BookshelfCards;
+						{/* {stackIndex === 0 && (
 							<div
 								style={{
 									position: 'absolute',
@@ -223,12 +251,4 @@ const BookshelfCards = () => {
 									15 books
 								</p>
 							</div>
-						)}
-					</div>
-				</div>
-			))}
-		</div>
-	)
-}
-
-export default BookshelfCards
+						)} */}
