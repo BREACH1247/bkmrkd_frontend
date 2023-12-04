@@ -1,6 +1,6 @@
 import React from 'react'
 import CardGrid from '../components/CardGrid'
-import Bookshelf from '../components/Bookshelf/Bookshelf'
+import BookshelfCarousal from '../components/BookshelfCarousal/BookshelfCarousal'
 import Slider from 'react-slick'
 import Navbar from '../components/Navbar/Navbar'
 import 'slick-carousel/slick/slick.css'
@@ -67,7 +67,7 @@ const Landing = () => {
 
 			<Slider {...carouselConfig}>
 				{data.map((item) => (
-					<Bookshelf key={item.id} details={item} />
+					<BookshelfCarousal key={item.id} details={item} />
 				))}
 			</Slider>
 

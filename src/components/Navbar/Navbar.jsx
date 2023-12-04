@@ -129,7 +129,7 @@ const Navbar = ({ name }) => {
             <img src={note} alt="" className="h-8 w-8" />
           </a>
           <a
-            href="/bookshelf"
+            href="/library"
             title="Bookshelf"
             className="hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
           >
