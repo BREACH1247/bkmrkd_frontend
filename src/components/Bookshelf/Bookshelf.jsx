@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Link } from 'react-router-dom';
 import lock from '../../assets/lock.png'
@@ -123,13 +124,13 @@ const Bookshelf = () => {
 	]
 	const lockedContainers = [1, 4];
 	const stacksData = stacks.map((cards, index) => ({
-	category: `Category ${index + 1}`,
+	bookshelf: `Bookshelf ${index + 1}`,
 	bookCount: 10,
 	books: cards,
 	isLocked: lockedContainers.includes(index),
 	}));
 
-	const StackText = ({ category, bookCount, isLocked }) => (
+	const StackText = ({ bookshelf, bookCount, isLocked }) => (
 	<div
 	className="stack-text"
 	style={{
@@ -145,10 +146,10 @@ const Bookshelf = () => {
 	}}
 	>
 		<div>
-		<h2 className="text-sm font-medium" style={{ fontSize: '16px' }}>
-			{category}
+		<h2 className="text-black" style={{ fontSize: '16px' , fontFamily: "'Roboto Mono', monospace", fontWeight: 700 }}>
+			{bookshelf}
 		</h2>
-		<p className="text-xs text-gray-500" style={{ fontSize: '14px' }}>
+		<p className=" text-gray-600" style={{ fontSize: '14px' , fontWeight: 600 }}>
 		{bookCount} books
 		</p>
 		</div>
@@ -161,7 +162,7 @@ const Bookshelf = () => {
 	<div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-10 gap-y-6 pb-2">
 		{stacksData.map((stack, stackIndex) => (
 			<Link
-			to={`/category/${stackIndex + 1}`} // Change the link path to include the category ID
+			to={`/bookshelf/${stackIndex + 1}`} 
 			key={stackIndex}
 			className="card-link"
 			style={{ textDecoration: 'none' }}
@@ -203,7 +204,7 @@ const Bookshelf = () => {
 				</div>
 				))}
 			</div>
-			<StackText category={stack.category} bookCount={stack.bookCount} isLocked={stack.isLocked} />
+			<StackText bookshelf={stack.bookshelf} bookCount={stack.bookCount} isLocked={stack.isLocked} />
 			</div>
 	</a>
 	</Link>

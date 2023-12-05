@@ -4,21 +4,22 @@ import cluster2 from '../../assets/cluster2.png';
 import notes from '../../assets/notes.png';
 import lock from '../../assets/lock.png';
 
-const Category = () => {
-    const categories = [
-        { name: 'Fantasy', bookCount: 25 },
-        { name: 'Science Fiction', bookCount: 32 },
-        { name: 'Romance', bookCount: 18 },
-        { name: 'Mystery', bookCount: 27 },
-        { name: 'Thriller', bookCount: 21 },
+const BookshelfCategory = () => {
+    const Bookshelf = [
+        { name: 'Bookshelf 1', bookCount: 25 },
+        { name: 'Bookshelf 2', bookCount: 32 },
+        { name: 'Bookshelf 3', bookCount: 18 },
+        { name: 'Bookshelf 4', bookCount: 27 },
+        { name: 'Bookshelf 5', bookCount: 21 },
+        { name: 'Bookshelf 6', bookCount: 19 }
     ];
 
     const tags = ['Romance', 'Horror', 'Fiction', 'Mystery', 'Adventure', 'Sci-Fi', 'Fantasy', 'Thriller'];
     const colors = ['bg-yellow-400', 'bg-red-400', 'bg-green-400', 'bg-blue-400'];
 
-    const StackText = ({ category, bookCount }) => (
+    const StackText = ({ bookshelf, bookCount }) => (
         <div className="flex justify-center mt-4 mb-4">
-            <h1>{category}</h1>
+            <h1>{bookshelf}</h1>
             <h2>{bookCount} books</h2>
             <img src={lock} alt="Locked" className="w-4 h-4 ml-2" />
         </div>
@@ -33,9 +34,9 @@ const Category = () => {
 
     return (
         <div className="mt-8">
-            {categories.map((category, index) => (
+            {Bookshelf.map((bookshelf, index) => (
                 <div key={index}>
-                    <StackText category={category.name} bookCount={category.bookCount} />
+                    <StackText bookshelf={bookshelf.name} bookCount={bookshelf.bookCount} />
                     <div className="flex justify-center flex-wrap mb-4">
                         <img
                             src={pages}
@@ -84,4 +85,4 @@ const Category = () => {
     );
 };
 
-export default Category;
+export default BookshelfCategory;
