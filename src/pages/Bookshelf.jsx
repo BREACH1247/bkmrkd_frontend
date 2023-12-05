@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar/Navbar'
 import CardGrid from '../components/CardGrid'
-import BookshelfCategory from '../components/BookshelfCategory/BookshelfCategory'
+import BookshelfCategory from '../components/Category/BookshelfCategory'
 
 const Bookshelf = () => {
 	return (

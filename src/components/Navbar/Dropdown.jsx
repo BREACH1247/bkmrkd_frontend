@@ -2,7 +2,7 @@ import React from 'react'
 
 const Dropdown = ({ isSignedIn, setIsSignedIn, name }) => (
 	<div
-		className="origin-top-right absolute mt-2 w-56 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50 border border-black"
+		className="origin-top-left absolute right-0 mt-2 w-56 mr-3 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 border border-black z-50 inline-block text-left "
 		style={{ backgroundColor: '#ece4c9' }}
 	>
 		<div
@@ -12,7 +12,7 @@ const Dropdown = ({ isSignedIn, setIsSignedIn, name }) => (
 			aria-labelledby="options-menu"
 		>
 			{isSignedIn && (
-				<div className="block px-4 py-2 text-sm text-gray-700 border-b border-black">
+				<div className="block px-4 py-2 text-sm font-semibold text-gray-700 border-b border-black">
 					Hi, {name}
 				</div>
 			)}

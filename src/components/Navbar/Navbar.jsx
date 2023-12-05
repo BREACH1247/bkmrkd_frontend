@@ -9,7 +9,9 @@ import Dropdown from './Dropdown';
 
 const Navbar = ({ name }) => {
   const [isOpen, setIsOpen] = useState(false);
+
   const [isSignedIn, setIsSignedIn] = useState(false);
+ 
 
   return (
     <nav className="">
@@ -19,17 +21,19 @@ const Navbar = ({ name }) => {
             bkmrk'd
           </span>
         </a>
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex col-start-2 items-center justify-end">
+          {/* Search button only appears in mobile view */}
           <a
             type="button"
             title="Search"
             data-collapse-toggle="navbar-search"
             aria-controls="navbar-search"
             aria-expanded="false"
-            className="inline-block md:hidden text-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 rounded-lg text-sm p-2.5 relative"
-          >
+            className=" text-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 rounded-lg text-sm p-2.5 relative"
+           
+         >
             <svg
-              className={`w-5 h-5 text-yellow-700 ${isOpen ? 'hidden md:inline-block' : 'md:hidden'}`}
+              className= "w-5 h-5 text-yellow-700 md:hidden"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -45,13 +49,14 @@ const Navbar = ({ name }) => {
             </svg>
             <span className="sr-only">Search Button</span>
           </a>
+          {/* Hamburger Menu button only appears in mobile view */}
           <a
             type="button"
             title="Open main menu"
             data-collapse-toggle="navbar-search"
             aria-controls="navbar-search"
             aria-expanded="false"
-            className="inline-block md:hidden text-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 rounded-lg text-sm p-2.5 relative"
+            className=" text-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 rounded-lg text-sm p-2.5 relative"
             onClick={() => setIsOpen(!isOpen)}
           >
             <svg
@@ -79,7 +84,9 @@ const Navbar = ({ name }) => {
           
 
         </div>
-        <div className="relative">
+        {/* Search Bar*/}
+        
+        <div className="md:flex hidden relative ml-40 mr-4">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
                 className="w-4 h-4 text-yellow-500 dark:text-yellow-400"
@@ -105,45 +112,49 @@ const Navbar = ({ name }) => {
               placeholder="Search..."
             />
           </div>
-        <div className="flex items-center space-x-4 md:space-x-0">
+          <div className="flex items-center space-x-2">
+          {/* Journal Page*/}
           <a
             href="#"
             title="Journal Page"
-            className="bg-yellow-400 hover:bg-yellow-500 text-black text-lg font-semibold py-2 px-9 rounded-lg flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
+            className="md:flex hidden bg-yellow-400 hover:bg-yellow-500 text-black text-lg font-semibold py-2 px-9 rounded-lg flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
           >
             <img src={page} alt="" className="mr-2 h-5 w-5" />
             Journal Page
           </a>
+          {/* Books button*/}
           <a
             href="#"
             title="Books"
-            className="hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
+            className="md:flex hidden hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
           >
             <img src={book} alt="" className="h-8 w-8" />
           </a>
+          {/* Note Button*/}
           <a
             href="#"
             title="Notes"
-            className="hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
+            className="md:flex hidden hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
           >
             <img src={note} alt="" className="h-8 w-8" />
           </a>
+          {/* Bookshelf Button*/}
           <a
             href="/library"
             title="Bookshelf"
-            className="hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
+            className="md:flex hidden hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
           >
             <img src={bookshelf} alt="" className="h-8 w-8" />
           </a>
-
+          {/* Account Button */}
           <div className="relative inline-block text-left">
-            <a
-              href="#"
-              title="Account"
-              onClick={() => setIsOpen(!isOpen)}
-              className="hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
-            >
-              <img src={account} alt="" className="h-8 w-8" />
+          <a
+            href="#"
+            title="Account"
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:flex hidden hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
+          >
+            <img src={account} alt="" className="h-8 w-8" />
             </a>
             {isOpen && (
               <Dropdown
