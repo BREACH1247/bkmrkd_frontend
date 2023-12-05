@@ -1,77 +1,47 @@
 // CardGrid.jsx
 
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import Card from './Card'
-
+import axios from 'axios'
 const CardGrid = () => {
-	const cardsData = [
-		{
-			imageUrl:
-				'https://www.designforwriters.com/wp-content/uploads/2017/10/design-for-writers-book-cover-tf-2-a-million-to-one.jpg',
-			rating: '4.5',
-		},
-		{
-			imageUrl: 'https://i.huffpost.com/gen/1039678/original.jpg',
-			rating: '4.2',
-		},
-		{
-			imageUrl:
-				'https://cdn.rickriordan.com/wp-content/uploads/2023/02/11223837/PERCY-CHALICE-FINALcover2.21-final.jpg',
-			rating: '3.8',
-		},
-		{
-			imageUrl:
-				'https://marketplace.canva.com/EAD7YHrjZYY/1/0/1003w/canva-blue-illustrated-stars-children%27s-book-cover-haFtaSNXXF4.jpg',
-			rating: '4.1',
-		},
-		{
-			imageUrl:
-				'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781668016138/holly-9781668016138_hr.jpg',
-			rating: '4.7',
-		},
-		{
-			imageUrl:
-				'https://res.cloudinary.com/bloomsbury-atlas/image/upload/w_568,c_scale/jackets/9781526635259.jpg',
-			rating: '4.7',
-		},
-		{
-			imageUrl:
-				'https://res.cloudinary.com/bloomsbury-atlas/image/upload/w_568,c_scale/jackets/9781526635259.jpg',
-			rating: '4.7',
-		},
-		{
-			imageUrl:
-				'https://marketplace.canva.com/EAD7YHrjZYY/1/0/1003w/canva-blue-illustrated-stars-children%27s-book-cover-haFtaSNXXF4.jpg',
-			rating: '4.1',
-		},
-		{
-			imageUrl:
-				'https://www.designforwriters.com/wp-content/uploads/2017/10/design-for-writers-book-cover-tf-2-a-million-to-one.jpg',
-			rating: '4.5',
-		},
-		{
-			imageUrl:
-				'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781668016138/holly-9781668016138_hr.jpg',
-			rating: '4.7',
-		},
-		{
-			imageUrl: 'https://i.huffpost.com/gen/1039678/original.jpg',
-			rating: '4.2',
-		},
-		{
-			imageUrl:
-				'https://cdn.rickriordan.com/wp-content/uploads/2023/02/11223837/PERCY-CHALICE-FINALcover2.21-final.jpg',
-			rating: '3.8',
-		},
-	]
+  const [newdata,setNewdata] = useState([]);
+  const [page,setPage] = useState(1);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://43.205.231.10:5000/api/books?page=${page}`
+        );
+        setNewdata((prev) => [...prev, ...response.data.data.books]);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData();
+  }, [page]);
+  
+  
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
 
+    return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
+const handleScroll = () => {
+    const { scrollTop, clientHeight, scrollHeight } =
+        document.documentElement;
+
+    if (scrollTop + clientHeight >= scrollHeight) {
+        setPage((prev) => prev + 1);
+    }
+};
 	return (
 		
 		<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
-			 
-
-			{cardsData.map((card, index) => (
-				<Card key={index} imageUrl={card.imageUrl} rating={card.rating} />
+			{newdata.map((card, index) => (
+				<Card key={index} imageUrl={card.cover_page} rating={card.book_average_rating} bookId={card.book_id}/>
 			))}
 		</div>
 	)
