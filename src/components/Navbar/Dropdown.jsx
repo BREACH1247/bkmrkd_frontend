@@ -52,7 +52,7 @@ const Dropdown = ({ isSignedIn, setIsSignedIn, name }) => (
 						Profile
 					</a>
 					<a
-						href="#"
+						href="account/"
 						className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100"
 						role="menuitem"
 					>
