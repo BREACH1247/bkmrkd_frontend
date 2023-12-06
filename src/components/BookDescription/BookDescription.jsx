@@ -93,7 +93,7 @@ const BookDescription = ({ book }) => {
           <img src={star} alt="star" className="w-5 h-5 mr-1" />
         </div>
 
-        <div className="ml-0.5 mt-4 grid grid-cols-2 gap-2">
+        <div className="ml-0.5 mt-4 grid grid-cols-3 gap-2">
           {slicedTagsFirstLine.map((tag, index) => (
             <div
               key={index}
@@ -103,18 +103,18 @@ const BookDescription = ({ book }) => {
             </div>
           ))}
         </div>
-        <div className="ml-0.5 mt-2 grid grid-cols-2 gap-2">
+        <div className="ml-0.5 mt-2 grid grid-cols-3 gap-2">
           {slicedTagsSecondLine.map((tag, index) => (
             <div
               key={index}
-              className={`tag-box rounded-full px-12 py-2 border border-gray-700 ${getRandomColor()} cursor-pointer flex items-center justify-center text-xs`}
+              className={`tag-box rounded-full px-12 py-2 border border-gray-700 ${getRandomColor()} cursor-pointer flex items-center justify-center text-sm`}
             >
               {tag}
             </div>
           ))}
-          {bookData.tags.length > 5 && (
+          {bookData.tags.length > 5 && !showMore && (
             <div
-              className={`tag-box rounded-full px-4 py-2 border border-gray-700 ${getRandomColor()} cursor-pointer flex items-center justify-center text-xs`}
+              className={`tag-box rounded-full px-4 py-2 border border-gray-700 ${getRandomColor()} cursor-pointer flex items-center justify-center text-sm`}
               title={remainingTags.join(", ")}
               onClick={() => setShowMore(!showMore)}
             >
@@ -123,7 +123,7 @@ const BookDescription = ({ book }) => {
           )}
         </div>
         {showMore && (
-          <div className="ml-0.5 mt-2 grid grid-cols-2 gap-2">
+          <div className="ml-0.5 mt-2 grid grid-cols-3 gap-2">
             {remainingTags.map((tag, index) => (
               <div
                 key={index}
