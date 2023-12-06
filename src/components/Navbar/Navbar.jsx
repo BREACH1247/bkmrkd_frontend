@@ -29,7 +29,7 @@ const Navbar = ({ name }) => {
             data-collapse-toggle="navbar-search"
             aria-controls="navbar-search"
             aria-expanded="false"
-            className=" text-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 rounded-lg text-sm p-2.5 relative"
+            className=" text-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 rounded-lg text-sm p-2.5 relative cursor-pointer"
             onClick={() => setIsSearchOpen(!isSearchOpen)}
            
          >
@@ -54,7 +54,7 @@ const Navbar = ({ name }) => {
                 <div className="md:flex hidden relative ml-28 mr-8">
                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                   <svg
-                    className="w-4 h-4 text-yellow-500 dark:text-yellow-400 cursor-pointer"
+                    className="w-4 h-4 text-yellow-400 cursor-pointer"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -73,7 +73,7 @@ const Navbar = ({ name }) => {
                 <input
                   type="text"
                   id="search-navbar"
-                  className="block w-full p-2 ps-10 text-md text-yellow-900 border border-yellow-300 rounded-lg bg-yellow-50 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-black dark:border-yellow-600 dark:placeholder-yellow-600 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                  className="block w-full p-2 ps-8 text-md text-yellow-500 border border-yellow-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500 dark:bg-black dark:border-yellow-600 dark:placeholder-yellow-600 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                   placeholder="Search..."
                 />
               </div>
@@ -87,11 +87,11 @@ const Navbar = ({ name }) => {
             data-collapse-toggle="navbar-search"
             aria-controls="navbar-search"
             aria-expanded="false"
-            className=" text-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 rounded-lg text-sm p-2.5 relative"
+            className=" text-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 rounded-lg text-sm p-2.5 relative cursor-pointer"
             onClick={() => setIsOpen(!isOpen)}
           >
             <svg
-              className="w-5 h-5 text-yellow-500 dark:text-yellow-400 cursor-pointer"
+              className="w-5 h-5 text-yellow-700 "
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
