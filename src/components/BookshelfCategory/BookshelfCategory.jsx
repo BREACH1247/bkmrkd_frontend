@@ -4,14 +4,14 @@ import cluster2 from "../../assets/cluster2.png";
 import notes from "../../assets/notes.png";
 import lock from "../../assets/lock.png";
 
-const BookshelfCategory = () => {
+const BookshelfCategory = ({ selectedBookshelf, setSelectedBookshelf }) => {
   const Bookshelf = [
     { name: "Bookshelf 1", bookCount: 25 },
-    // { name: 'Bookshelf 2', bookCount: 32 },
-    // { name: 'Bookshelf 3', bookCount: 18 },
-    // { name: 'Bookshelf 4', bookCount: 27 },
-    // { name: 'Bookshelf 5', bookCount: 21 },
-    // { name: 'Bookshelf 6', bookCount: 19 }
+    { name: 'Bookshelf 2', bookCount: 32 },
+    { name: 'Bookshelf 3', bookCount: 18 },
+    { name: 'Bookshelf 4', bookCount: 27 },
+    { name: 'Bookshelf 5', bookCount: 21 },
+    { name: 'Bookshelf 6', bookCount: 19 }
   ];
 
   const tags = [
@@ -33,16 +33,11 @@ const BookshelfCategory = () => {
   }
 
   const StackText = ({ bookshelf, bookCount }) => (
-    <div className="flex flex-col items-center justify-center mt-2 mb-2">
-      <div
-        style={{ fontFamily: "Roboto Mono", fontWeight: 700, fontSize: "36px" }}
-      >
+    <div className="flex flex-col items-center justify-center mt-2 mb-2" >
+      <div style={{ fontFamily: "Roboto Mono", fontWeight: 700, fontSize: "36px" }}>
         {bookshelf}
       </div>
-      <div
-        className="flex items-center"
-        style={{ fontFamily: "Noto Sans", fontWeight: 600, fontSize: "20px" }}
-      >
+      <div className="flex items-center" style={{ fontFamily: "Noto Sans", fontWeight: 600, fontSize: "20px" }}>
         {bookCount} books
         <img src={lock} alt="Locked" className="w-4 h-4 ml-2" />
       </div>
@@ -51,11 +46,12 @@ const BookshelfCategory = () => {
 
   return (
     <div className="mt-4">
-      {Bookshelf.map((bookshelf, index) => (
+      {Bookshelf.filter((_, index) => index === selectedBookshelf).map((bookshelf, index) => (
         <div key={index}>
           <StackText
             bookshelf={bookshelf.name}
             bookCount={bookshelf.bookCount}
+            onClick={() => setSelectedBookshelf(index)}
           />
           <div className="flex justify-center flex-wrap mt-6">
             <img

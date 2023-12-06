@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Navbar from '../components/Navbar/Navbar';
 
 const BookPage = () => {
   const { bookId } = useParams();
@@ -24,7 +25,9 @@ const BookPage = () => {
 }, []);
 
   return (
-    <div>
+   
+    <div className="container max-w-7xl mx-auto">
+       <Navbar />
       <h2>Book Page for Book ID: {bookId}</h2>
       
     </div>

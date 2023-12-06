@@ -129,7 +129,7 @@ const Bookshelf = () => {
 	books: cards,
 	isLocked: lockedContainers.includes(index),
 	}));
-
+	
 	const StackText = ({ bookshelf, bookCount, isLocked }) => (
 	<div
 	className="stack-text"
@@ -161,7 +161,7 @@ const Bookshelf = () => {
 		
 	<div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-10 gap-y-6 pb-2">
 		{stacksData.map((stack, stackIndex) => (
-			<Link
+		<Link
 			to={`/bookshelf/${stackIndex + 1}`} 
 			key={stackIndex}
 			className="card-link"
