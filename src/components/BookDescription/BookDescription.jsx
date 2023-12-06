@@ -1,47 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../Card";
 import bookmark from "../../assets/bookmark.png";
 import pages from "../../assets/pages.png";
 import share from "../../assets/share.png";
 import review from "../../assets/review.png";
 import star from "../../assets/star.png";
+import axios from 'axios';
 
-const BookDescription = () => {
-  const stack = [
-    [
-      {
-        imageUrl:
-          "https://www.designforwriters.com/wp-content/uploads/2017/10/design-for-writers-book-cover-tf-2-a-million-to-one.jpg",
-      },
+const BookDescription = ({ book }) => {
+  const [showMore, setShowMore] = useState(false);
+  const [bookData, setBookData] = useState({
+    imageUrl: "",
+    title: "Book Title",
+    author: "Author Name",
+    rating: "Rating",
+    tags: [
+      "Romance",
+      "Horror",
+      "Fiction",
+      "Mystery",
+      "Adventure",
+      "Sci-Fi",
+      "Fantasy",
+      "Thriller",
     ],
-  ];
-  const tags = [
-    "Romance",
-    "Horror",
-    "Fiction",
-    "Mystery",
-    "Adventure",
-    "Sci-Fi",
-    "Fantasy",
-    "Thriller",
-  ];
+    description: "This is a description of the book.",
+  });
+
   const colors = ["bg-yellow-400", "bg-red-400", "bg-green-500", "bg-blue-500"];
 
-  const slicedTagsFirstLine = tags.slice(0, 3);
-  const slicedTagsSecondLine = tags.slice(3, 5);
-  const remainingTags = tags.slice(5);
-  const [showMore, setShowMore] = useState(false);
+  const slicedTagsFirstLine = bookData.tags.slice(0, 3);
+  const slicedTagsSecondLine = bookData.tags.slice(3, 5);
+  const remainingTags = bookData.tags.slice(5);
 
   function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
   }
 
+  useEffect(() => {
+    if (book) {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`YOUR_API_ENDPOINT/${book.bookId}`); 
+          setBookData({
+            imageUrl: response.data.imageUrl || "",
+            title: response.data.title || "Book Title",
+            author: response.data.author || "Author Name",
+            rating: response.data.rating || "Rating",
+            tags: response.data.tags || [],
+            description: response.data.description || "This is a description of the book.",
+          });
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [book]);
+
   return (
     <div className="grid grid-cols-2 gap-4">
-      {/* Book cover and actions */}
       <div className="col-span-1">
         <div className="max-w-[11rem] h-[18rem] overflow-hidden mb-2 relative">
-          <Card imageUrl={stack[0][0].imageUrl} />
+          <Card imageUrl={bookData.imageUrl} />
         </div>
         <div className="flex w-full mb-2">
           <img
@@ -75,10 +97,9 @@ const BookDescription = () => {
         </button>
       </div>
 
-      {/* Book details */}
       <div className="col-span-1 flex flex-col items-start ml-[-25rem]">
         <h2 className="text-3xl font-bold mb-1">
-          Book Title
+          {bookData.title}
           <em
             style={{ fontSize: "1.5rem" }}
             className="ml-6 font-medium italic inline-block"
@@ -86,15 +107,13 @@ const BookDescription = () => {
             Book Title Number
           </em>
         </h2>
-        <p className="text-2xl font-medium mb-1">Author Name</p>
+        <p className="text-2xl font-medium mb-1">{bookData.author}</p>
         <div className="flex items-center">
-          <p className="text-3xl font-semibold mr-3">Rating</p>
+          <p className="text-3xl font-semibold mr-3">{bookData.rating}</p>
           <img src={star} alt="star" className="w-5 h-5 mr-1" />
         </div>
 
-        {/* Display tags */}
         <div className="ml-0.5 mt-4 grid grid-cols-2 gap-2">
-          {/* First line of tags */}
           {slicedTagsFirstLine.map((tag, index) => (
             <div
               key={index}
@@ -105,7 +124,6 @@ const BookDescription = () => {
           ))}
         </div>
         <div className="ml-0.5 mt-2 grid grid-cols-2 gap-2">
-          {/* Second line of tags */}
           {slicedTagsSecondLine.map((tag, index) => (
             <div
               key={index}
@@ -114,18 +132,16 @@ const BookDescription = () => {
               {tag}
             </div>
           ))}
-          {/* + Tag */}
-          {tags.length > 5 && (
+          {bookData.tags.length > 5 && (
             <div
               className={`tag-box rounded-full px-4 py-2 border border-gray-700 ${getRandomColor()} cursor-pointer flex items-center justify-center text-xs`}
               title={remainingTags.join(", ")}
               onClick={() => setShowMore(!showMore)}
             >
-              +{tags.length - 5}
+              +{bookData.tags.length - 5}
             </div>
           )}
         </div>
-        {/* Show more tags */}
         {showMore && (
           <div className="ml-0.5 mt-2 grid grid-cols-2 gap-2">
             {remainingTags.map((tag, index) => (
@@ -139,10 +155,9 @@ const BookDescription = () => {
           </div>
         )}
 
-        {/* Description */}
         <div className="pt-4">
           <h2 className="text-2xl font-bold mt-8">Description</h2>
-          <p className="mt-2">This is a description of the book.</p>
+          <p className="mt-2">{bookData.description}</p>
         </div>
       </div>
     </div>
