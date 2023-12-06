@@ -18,14 +18,14 @@ const Dropdown = ({ isSignedIn, setIsSignedIn, name }) => (
 			)}
 			<a
 				href="#"
-				className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+				className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100"
 				role="menuitem"
 			>
 				Help
 			</a>
 			<a
 				href="#"
-				className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+				className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100"
 				role="menuitem"
 			>
 				Send Feedback
@@ -36,7 +36,7 @@ const Dropdown = ({ isSignedIn, setIsSignedIn, name }) => (
 					onClick={() => {
 						setIsSignedIn(true)
 					}}
-					className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+					className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100"
 					role="menuitem"
 				>
 					Sign in
@@ -46,14 +46,14 @@ const Dropdown = ({ isSignedIn, setIsSignedIn, name }) => (
 				<>
 					<a
 						href="#"
-						className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+						className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100"
 						role="menuitem"
 					>
 						Profile
 					</a>
 					<a
 						href="#"
-						className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+						className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100"
 						role="menuitem"
 					>
 						Account Settings
@@ -61,7 +61,7 @@ const Dropdown = ({ isSignedIn, setIsSignedIn, name }) => (
 					<a
 						href="#"
 						onClick={() => setIsSignedIn(false)}
-						className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+						className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100"
 						role="menuitem"
 					>
 						Sign out

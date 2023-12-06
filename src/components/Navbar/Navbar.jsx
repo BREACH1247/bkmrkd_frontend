@@ -9,7 +9,7 @@ import Dropdown from './Dropdown';
 
 const Navbar = ({ name }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
  
 
@@ -30,6 +30,7 @@ const Navbar = ({ name }) => {
             aria-controls="navbar-search"
             aria-expanded="false"
             className=" text-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 rounded-lg text-sm p-2.5 relative"
+            onClick={() => setIsSearchOpen(!isSearchOpen)}
            
          >
             <svg
@@ -48,6 +49,36 @@ const Navbar = ({ name }) => {
               />
             </svg>
             <span className="sr-only">Search Button</span>
+            {isSearchOpen && (
+              
+                <div className="md:flex hidden relative ml-28 mr-8">
+                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg
+                    className="w-4 h-4 text-yellow-500 dark:text-yellow-400 cursor-pointer"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
+              <span className="sr-only">Search bar</span>
+              </div>
+                <input
+                  type="text"
+                  id="search-navbar"
+                  className="block w-full p-2 ps-10 text-md text-yellow-900 border border-yellow-300 rounded-lg bg-yellow-50 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-black dark:border-yellow-600 dark:placeholder-yellow-600 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                  placeholder="Search..."
+                />
+              </div>
+            
+            )}
           </a>
           {/* Hamburger Menu button only appears in mobile view */}
           <a
@@ -60,7 +91,7 @@ const Navbar = ({ name }) => {
             onClick={() => setIsOpen(!isOpen)}
           >
             <svg
-              className="w-5 h-5 cursor-pointer"
+              className="w-5 h-5 text-yellow-500 dark:text-yellow-400 cursor-pointer"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -85,8 +116,7 @@ const Navbar = ({ name }) => {
 
         </div>
         {/* Search Bar*/}
-        
-        <div className="md:flex hidden relative ml-40 mr-4">
+        <div className="md:flex hidden relative ml-28 mr-8">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
                 className="w-4 h-4 text-yellow-500 dark:text-yellow-400"
