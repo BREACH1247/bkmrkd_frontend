@@ -103,7 +103,7 @@ const BookshelfCategory = ({ selectedBookshelf, setSelectedBookshelf }) => {
               </div>
             </div>
           )}
-         </div>
+        </div>
           {showMore && (
             <div className="flex justify-center flex-wrap">
               {tags.slice(5).map((tag, index) => (

@@ -5,9 +5,10 @@ import pages from "../../assets/pages.png";
 import share from "../../assets/share.png";
 import review from "../../assets/review.png";
 import star from "../../assets/star.png";
-import axios from 'axios';
+
 
 const BookDescription = ({ book }) => {
+    
   const [showMore, setShowMore] = useState(false);
   const [bookData, setBookData] = useState({
     imageUrl: "",
@@ -37,35 +38,14 @@ const BookDescription = ({ book }) => {
     return colors[Math.floor(Math.random() * colors.length)];
   }
 
-  useEffect(() => {
-    if (book) {
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(`YOUR_API_ENDPOINT/${book.bookId}`); 
-          setBookData({
-            imageUrl: response.data.imageUrl || "",
-            title: response.data.title || "Book Title",
-            author: response.data.author || "Author Name",
-            rating: response.data.rating || "Rating",
-            tags: response.data.tags || [],
-            description: response.data.description || "This is a description of the book.",
-          });
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-
-      fetchData();
-    }
-  }, [book]);
 
   return (
     <div className="grid grid-cols-2 gap-4">
       <div className="col-span-1">
         <div className="max-w-[11rem] h-[18rem] overflow-hidden mb-2 relative">
           <Card imageUrl={bookData.imageUrl} />
-        </div>
-        <div className="flex w-full mb-2">
+            </div>
+            <div className="flex w-full mb-2">
           <img
             src={bookmark}
             alt="bookmark"
