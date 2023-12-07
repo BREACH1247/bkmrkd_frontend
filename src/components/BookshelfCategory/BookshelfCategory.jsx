@@ -1,17 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import pages from "../../assets/pages.png";
 import cluster2 from "../../assets/cluster2.png";
 import notes from "../../assets/notes.png";
 import lock from "../../assets/lock.png";
+import { useParams } from 'react-router-dom';
+import axios from 'axios'
 
-const BookshelfCategory = ({ selectedBookshelf, setSelectedBookshelf }) => {
+
+const BookshelfCategory = () => {
+  const { bookshelfid } = useParams();
+  console.log(bookshelfid)
+  const [newdata,setNewdata] = useState([]);
+	useEffect(() => {
+		const fetchData = async () => {
+		  try {
+			const response = await axios.get(
+			  `http://43.205.231.10:5000/api/bookshelves?page=1`
+			);
+			setNewdata(response.data.data.bookshelves);
+			console.log(newdata);
+		  } catch (error) {
+			console.error('Error fetching data:', error);
+		  }
+		};
+	  
+		fetchData();
+	  }, []);
   const Bookshelf = [
-    { name: "Bookshelf 1", bookCount: 25 },
-    { name: 'Bookshelf 2', bookCount: 32 },
-    { name: 'Bookshelf 3', bookCount: 18 },
-    { name: 'Bookshelf 4', bookCount: 27 },
-    { name: 'Bookshelf 5', bookCount: 21 },
-    { name: 'Bookshelf 6', bookCount: 19 }
+    { name: "Bookshelf1", bookCount: 25 },
   ];
 
   const tags = [
@@ -46,12 +62,11 @@ const BookshelfCategory = ({ selectedBookshelf, setSelectedBookshelf }) => {
 
   return (
     <div className="mt-4">
-      {Bookshelf.filter((_, index) => index === selectedBookshelf).map((bookshelf, index) => (
+      {Bookshelf.map((bookshelf, index) => (
         <div key={index}>
           <StackText
             bookshelf={bookshelf.name}
             bookCount={bookshelf.bookCount}
-            onClick={() => setSelectedBookshelf(index)}
           />
           <div className="flex justify-center flex-wrap mt-6">
             <img

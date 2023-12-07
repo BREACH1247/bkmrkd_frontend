@@ -17,7 +17,6 @@ const BookPage = () => {
       const response = await axios.get(
         `http://43.205.231.10:5000/api/books/${bookId}`
       );
-      console.log(response)
       setReviews(response.data.reviews);
     } catch (error) {
       console.error('Error fetching data:', error);

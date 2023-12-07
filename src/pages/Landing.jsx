@@ -1,10 +1,12 @@
-import React from 'react'
 import CardGrid from '../components/CardGrid'
 import BookshelfCarousal from '../components/BookshelfCarousal/BookshelfCarousal'
 import Slider from 'react-slick'
 import Navbar from '../components/Navbar/Navbar'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import axios from 'axios';
+import { useState,useEffect } from 'react'
+
 
 let data = [
 	{
@@ -61,12 +63,27 @@ const carouselConfig = {
 }
 
 const Landing = () => {
+	const [newdata,setNewdata] = useState([]);
+	useEffect(() => {
+		const fetchData = async () => {
+		  try {
+			const response = await axios.get(
+			  `http://43.205.231.10:5000/api/bookshelves?page=1`
+			);
+			setNewdata(response.data.data.bookshelves);
+		  } catch (error) {
+			console.error('Error fetching data:', error);
+		  }
+		};
+	  
+		fetchData();
+	  }, []);
 	return (
 		<div className="container max-w-7xl mx-auto">
 			<Navbar />
 
 			<Slider {...carouselConfig}>
-				{data.map((item) => (
+				{newdata.map((item) => (
 					<BookshelfCarousal key={item.id} details={item} />
 				))}
 			</Slider>
