@@ -17,8 +17,6 @@ const BookshelfCategory = () => {
 			try {
 				let token = Cookies.get('jwt')
 
-				console.log(token)
-
 				let config = {
 					method: 'get',
 					maxBodyLength: Infinity,
@@ -38,7 +36,7 @@ const BookshelfCategory = () => {
 		}
 
 		fetchData()
-	}, [bookshelfid]) // Add bookshelfId to the dependency array
+	}, [bookshelfid])
 
 	useEffect(() => {
 		if (data) {
