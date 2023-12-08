@@ -4,7 +4,7 @@ import Card from '../Card';
 import axios from 'axios';
 
 const RecommendedBooks = ({ recommendedBooks }) => {
-    const [recommendedBooksData, setRecommendedBooksData] = useState([]);
+  // const [bookDetails, setBookDetails] = useState([]);
   
     useEffect(() => {
       const fetchRecommendedBooksData = async () => {
@@ -26,8 +26,8 @@ const RecommendedBooks = ({ recommendedBooks }) => {
   
     return (
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
-        {recommendedBooksData.map((book, index) => (
-          <Link to={`/book/${book.book_id}`} key={book.book_id || index}>
+        {bookDetails.map((book, index) => (
+          <Link to={`/book/${book.book_id}`} key={book.book_id || index} onClick={handleCardClick}>
             <Card
               imageUrl={book.cover_page}
               rating={book.book_average_rating} 
