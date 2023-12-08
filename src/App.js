@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
 
 const App = () => {
   const PrivateRoute = ({ element }) => {
-    return Cookies.get('token') ? element : window.location.href = "/account"
+    return Cookies.get('jwt') ? element : window.location.href = "/account"
   };
   return (
     <Router>

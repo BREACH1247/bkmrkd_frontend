@@ -4,8 +4,8 @@ import Slider from 'react-slick'
 import Navbar from '../components/Navbar/Navbar'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import axios from 'axios';
-import { useState,useEffect } from 'react'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 
 const carouselConfig = {
 	dots: false,
@@ -19,23 +19,22 @@ const carouselConfig = {
 }
 
 const Landing = () => {
-	const [newdata,setNewdata] = useState([]);
+	const [newdata, setNewdata] = useState([])
 	useEffect(() => {
 		const fetchData = async () => {
-		  try {
-			const response = await axios.get(
-			  `http://43.205.231.10:5000/api/bookshelves?page=1`
-			  
-			);
-			console.log(response.data.data)
-			setNewdata(response.data.data.bookshelves);
-		  } catch (error) {
-			console.error('Error fetching data:', error);
-		  }
-		};
-	  
-		fetchData();
-	  }, []);
+			try {
+				const response = await axios.get(
+					`http://43.205.231.10:5000/api/bookshelves?page=1`
+				)
+				console.log(response.data.data)
+				setNewdata(response.data.data.bookshelves)
+			} catch (error) {
+				console.error('Error fetching data:', error)
+			}
+		}
+
+		fetchData()
+	}, [])
 	return (
 		<div className="container max-w-7xl mx-auto">
 			<Navbar />
