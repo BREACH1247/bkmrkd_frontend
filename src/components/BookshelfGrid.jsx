@@ -6,7 +6,6 @@ import axios from 'axios'
 
 const BookshelfGrid = () => {
 	const { bookshelfid } = useParams()
-	console.log(bookshelfid)
 	const [newdata, setNewdata] = useState([])
 	const [page, setPage] = useState(1)
 
