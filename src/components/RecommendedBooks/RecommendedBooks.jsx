@@ -4,25 +4,30 @@ import Card from '../Card';
 import axios from 'axios';
 
 const RecommendedBooks = ({ recommendedBooks }) => {
-  // const [bookDetails, setBookDetails] = useState([]);
+  const [bookDetails, setBookDetails] = useState([]);
   
-    useEffect(() => {
-      const fetchRecommendedBooksData = async () => {
+   useEffect(() => {
+      const fetchBookDetails = async () => {
         try {
-          const bookDetailsPromises = recommendedBooks.map(async (bookId) => {
-            const response = await axios.get(`http://43.205.231.10:5000/api/books/${bookId}`);
-            return response.data.data.book;
-          });
-  
-          const booksData = await Promise.all(bookDetailsPromises);
-          setRecommendedBooksData(booksData);
+            const response = await axios.get(`http://43.205.231.10:5000/api/books/31708384`);
+            setBookDetails(response);
         } catch (error) {
-          console.error('Error fetching recommended books data:', error);
+          console.error('Error fetching book details:', error);
         }
       };
   
-      fetchRecommendedBooksData();
+      fetchBookDetails();
     }, [recommendedBooks]);
+
+    useEffect(() => {
+      if(bookDetails) {
+        console.log(bookDetails);
+      }
+    }, [bookDetails])
+
+    const handleCardClick = () => {
+      window.location.reload();
+    };
   
     return (
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
