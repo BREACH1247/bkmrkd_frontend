@@ -1,22 +1,37 @@
 // Reviews.jsx
-
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import star from '../../assets/star.png';
 import emptystar from '../../assets/emptystar.png';
+import axios from 'axios';
 
-const Reviews = () => {
-  // Hardcoded array of reviews
-  const reviews = [
-    { name: 'John Doe', rating: 4, comment: 'Great book!' },
-    { name: 'Jane Doe', rating: 5, comment: 'I loved it!' },
-    // Add more reviews as needed
-  ];
+
+const Reviews = (bookId) => {
+  const [data,setData] = useState([])
+  
+  useEffect(() => {
+    const fetchBookDetails = async () => {
+      try {
+          await axios.get(`http://43.205.231.10:5000/api/reviews/book/${bookId}`).then(response => setData(response))
+          
+      } catch (error) {
+        console.error('Error fetching book details:', error);
+      }
+    };
+
+    fetchBookDetails();
+  }, [recommendedBooks]);
+
+  useEffect(() => {
+    if (data) {
+      console.log(data)
+    }
+  }, [data])
 
   return (
     <div>
       <h2 className="text-2xl font-bold text-center">Reviews</h2>
       <hr className="my-4 border-black border-t-2" />
-      {reviews.map((review, index) => (
+      {/* {response.map((review, index) => (
         <div key={index} className="mb-4">
           <h3 className="text-lg font-bold">{review.name}</h3>
           <div className="flex items-center mb-1">
@@ -31,7 +46,7 @@ const Reviews = () => {
           </div>
           <p>{review.comment}</p>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 };

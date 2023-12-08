@@ -4,8 +4,6 @@ import lock from "../../assets/lock.png";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-// ... (previous imports)
-
 const Bookshelf = () => {
   const [data, setData] = useState([]);
   let stacks = [];
