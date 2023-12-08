@@ -2,33 +2,26 @@ import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../Card';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 const RecommendedBooks = ({ recommendedBooks }) => {
     const [recommendedBooksData, setRecommendedBooksData] = useState([]);
   
     useEffect(() => {
-      const fetchData = async () => {
+      const fetchRecommendedBooksData = async () => {
         try {
-          let token = Cookies.get('jwt')
-
-				let config = {
-					method: 'get',
-					maxBodyLength: Infinity,
-					url: `http://43.205.231.10:5000/api/books/search?q=${recommendedBooks}`,
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-
-				const response = await axios(config)
-        setRecommendedBooksData(response.data.data.books);
+          const bookDetailsPromises = recommendedBooks.map(async (bookId) => {
+            const response = await axios.get(`http://43.205.231.10:5000/api/books/${bookId}`);
+            return response.data.data.book;
+          });
+  
+          const booksData = await Promise.all(bookDetailsPromises);
+          setRecommendedBooksData(booksData);
         } catch (error) {
           console.error('Error fetching recommended books data:', error);
         }
       };
   
-      fetchData();
+      fetchRecommendedBooksData();
     }, [recommendedBooks]);
   
     return (

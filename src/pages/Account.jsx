@@ -68,6 +68,13 @@ const Account = () => {
 
 	return (
 		<div className="container max-w-7xl mx-auto">
+			<div className="max-w-full grid grid-cols-1 md:grid-cols-[auto,1fr,auto] md:gap-4 items-center justify-between mx-auto py-4 my-1">
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <span className="self-auto text-4xl font-bold whitespace-nowrap dark:text-black">
+            bkmrk'd
+          </span>
+        </a>
+		</div>
 			<div className="flex items-center justify-center min-h-screen">
 				<div className="p-8 w-96 " style={cardStyle}>
 					{showSignUp && (

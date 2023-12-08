@@ -11,7 +11,7 @@ const Dropdown = () => {
 
 			console.log('Sign out successful:', response.data)
 
-			Cookies.remove('token', { path: '/' })
+			Cookies.remove('jwt', { path: '/' })
 
 			window.location.href = '/account'
 		} catch (err) {
