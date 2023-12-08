@@ -9,7 +9,7 @@ import Reviews from '../components/Reviews/Reviews';
 
 const BookPage = () => {
   const { bookId } = useParams();
-  const [reviews, setReviews] = React.useState([]);
+  const [bookdata, setBookdata] = React.useState([]);
 
   useEffect(() => {
   const fetchData = async () => {
@@ -17,7 +17,7 @@ const BookPage = () => {
       const response = await axios.get(
         `http://43.205.231.10:5000/api/books/${bookId}`
       );
-      setReviews(response.data.reviews);
+      setBookdata(response.data.data.book)
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -30,8 +30,8 @@ const BookPage = () => {
    
     <div className="container max-w-7xl mx-auto">
        <Navbar />
-       <BookDescription />
-       <Reviews reviews={reviews} /> 
+       <BookDescription  book = {bookdata}/>
+       <Reviews/> 
       <h2>Book Page for Book ID: {bookId}</h2>
       
     </div>

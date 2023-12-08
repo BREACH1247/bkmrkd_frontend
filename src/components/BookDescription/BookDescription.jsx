@@ -43,7 +43,7 @@ const BookDescription = ({ book }) => {
     <div className="grid grid-cols-2 gap-4">
       <div className="col-span-1">
         <div className="max-w-[11rem] h-[18rem] overflow-hidden mb-2 relative">
-          <Card imageUrl={bookData.imageUrl} />
+          <Card imageUrl={book.cover_page} />
             </div>
             <div className="flex w-full mb-2">
           <img
@@ -79,17 +79,17 @@ const BookDescription = ({ book }) => {
 
       <div className="col-span-1 flex flex-col items-start ml-[-25rem]">
         <h2 className="text-3xl font-bold mb-1">
-          {bookData.title}
+          {book.title_without_series}
           <em
             style={{ fontSize: "1.5rem" }}
             className="ml-6 font-medium italic inline-block"
           >
-            Book Title Number
+            {book.book_id}
           </em>
         </h2>
-        <p className="text-2xl font-medium mb-1">{bookData.author}</p>
+        <p className="text-2xl font-medium mb-1">{book.author}</p>
         <div className="flex items-center">
-          <p className="text-3xl font-semibold mr-3">{bookData.rating}</p>
+          <p className="text-3xl font-semibold mr-3">{book.book_average_rating}</p>
           <img src={star} alt="star" className="w-5 h-5 mr-1" />
         </div>
 
@@ -137,7 +137,7 @@ const BookDescription = ({ book }) => {
 
         <div className="pt-4">
           <h2 className="text-2xl font-bold mt-8">Description</h2>
-          <p className="mt-2">{bookData.description}</p>
+          <p className="mt-2">{book.book_description}</p>
         </div>
       </div>
     </div>

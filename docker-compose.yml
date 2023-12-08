@@ -1,0 +1,22 @@
+version: "3"
+services:
+  web-server:
+    build: .
+    restart: always
+    networks:
+      - bkmrkd
+      
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - web-server
+    ports:
+      - '4000:80'
+    networks:
+      - bkmrkd
+
+networks:
+  bkmrkd:
+    driver: bridge

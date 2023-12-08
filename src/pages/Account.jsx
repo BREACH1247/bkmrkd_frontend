@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar/Navbar";
 import axios from "axios";
-import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { jwtDecode } from "jwt-decode";
+
 
 const Account = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['token']);
   const [showSignUp, setShowSignUp] = useState(false);
   const [showSignIn, setShowSignIn] = useState(true);
   const cardStyle = {
@@ -24,8 +24,8 @@ const Account = () => {
         password: e.target.elements.password.value,
       });
       console.log('Sign up successful:', response.data);
+      Cookies.set('token',response.data.data.token)
 
-      setCookie('token', response.data.data.token, { path: '/' }); 
       if (response.data.status === 'success') {
         navigate('/');
     }
@@ -35,6 +35,8 @@ const Account = () => {
     }
     
   };
+
+  
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -48,9 +50,16 @@ const Account = () => {
       );
       console.log("Sign in successful:", response.data);
 
-      setCookie("token", response.data.data.token, { path: "/" });
+      Cookies.set('token',response.data.data.token)
+
+      const decoded = jwtDecode(response.data.data.token);
+
+        console.log(decoded.user.name);
+
+        localStorage.setItem('name', decoded.user.name);
+    
       if (response.data.status === 'success') {
-        navigate('/'); 
+        window.location.href = '/';
     }
     } catch (error) {
       console.error("Sign in failed:", error);
@@ -61,7 +70,6 @@ const Account = () => {
 
   return (
     <div className="container max-w-7xl mx-auto">
-      <Navbar />
       <div className="flex items-center justify-center min-h-screen">
         <div className="p-8 w-96 " style={cardStyle}>
           {showSignUp && (

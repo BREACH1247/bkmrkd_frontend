@@ -1,7 +1,7 @@
 // Bookshelf.jsx
 import Navbar from '../components/Navbar/Navbar'
-import CardGrid from '../components/CardGrid'
 import BookshelfCategory from '../components/BookshelfCategory/BookshelfCategory'
+import BookshelfGrid from '../components/BookshelfGrid'
 
 const Bookshelf = () => {
 
@@ -10,7 +10,7 @@ const Bookshelf = () => {
             <Navbar />
             <BookshelfCategory />
             <div className="rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-[2.5px] mb-8 my-4"></div>
-            <CardGrid />
+            <BookshelfGrid/>
         </div>
     )
 }

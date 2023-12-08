@@ -17,7 +17,7 @@ const Library = () => {
 				<div>
 					<div className="mt-8">
 						<h1 className="text-3xl font-semibold text-gray-80 mb-4 text-center">
-							Meghna's Bookshelf
+						{localStorage.getItem('name').split(' ')[0]}'s Bookshelf
 						</h1>
 						<div className="flex justify-center">
 							<img
