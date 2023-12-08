@@ -1,19 +1,40 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import page from '../../assets/page.png';
-import note from '../../assets/note.png';
-import account from '../../assets/account.png';
-import book from '../../assets/book.png';
-import bookshelf from '../../assets/bookshelf.png';
-import Dropdown from './Dropdown';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Cookies from 'js-cookie'
+import PropTypes from "prop-types";
+import page from "../../assets/page.png";
+import note from "../../assets/note.png";
+import account from "../../assets/account.png";
+import book from "../../assets/book.png";
+import bookshelf from "../../assets/bookshelf.png";
+import Dropdown from "./Dropdown";
 
 const Navbar = ({ name }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
- 
+  const [searchboxdropdown, setsearchboxdropdown] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
-  return (
+        useEffect(() => {
+          const fetchSearchResults = async () => {
+            try {
+              const response = await axios.get(`http://43.205.231.10:5000/api/books/search?q=${searchQuery}`);
+              console.log(response.data);
+              setSearchResults(response.data || []);
+            } catch (error) {
+              console.error('Error fetching search results:', error);
+            }
+          };
+        
+          if (searchQuery) {
+            fetchSearchResults();
+          } else {
+            setSearchResults([]);
+          }
+        }, [searchQuery]);
+        return (
     <nav className="">
       <div className="max-w-full grid grid-cols-1 md:grid-cols-[auto,1fr,auto] md:gap-4 items-center justify-between mx-auto py-4 my-1">
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -31,10 +52,9 @@ const Navbar = ({ name }) => {
             aria-expanded="false"
             className=" text-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-600 rounded-lg text-sm p-2.5 relative cursor-pointer"
             onClick={() => setIsSearchOpen(!isSearchOpen)}
-           
-         >
+          >
             <svg
-              className= "w-5 h-5 text-yellow-700 md:hidden"
+              className="w-5 h-5 text-yellow-700 md:hidden"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -50,8 +70,7 @@ const Navbar = ({ name }) => {
             </svg>
             <span className="sr-only">Search Button</span>
             {isSearchOpen && (
-              
-                <div className="md:flex hidden relative ml-28 mr-8">
+              <div className="md:flex hidden relative ml-28 mr-8">
                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                   <svg
                     className="w-4 h-4 text-yellow-400 cursor-pointer"
@@ -68,16 +87,27 @@ const Navbar = ({ name }) => {
                       d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                     />
                   </svg>
-              <span className="sr-only">Search bar</span>
-              </div>
+                  <span className="sr-only">Search bar</span>
+                </div>
                 <input
                   type="text"
                   id="search-navbar"
                   className="block w-full p-2 ps-8 text-md text-yellow-500 border border-yellow-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500 dark:bg-black dark:border-yellow-600 dark:placeholder-yellow-600 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                   placeholder="Search..."
+                  onClick={() => setsearchboxdropdown(true)}
+                  onBlur={() => setsearchboxdropdown(false)}
                 />
+                {searchboxdropdown && (
+                  <div
+                    className="absolute top-full right-0 mt-2 w-56"
+                    style={{ backgroundColor: "#ece4c9" }}
+                  >
+                    <li>Option 1</li>
+                    <li>Option 2</li>
+                    <li>Option 3</li>
+                  </div>
+                )}
               </div>
-            
             )}
           </a>
           {/* Hamburger Menu button only appears in mobile view */}
@@ -107,42 +137,63 @@ const Navbar = ({ name }) => {
             </svg>
             <span className="sr-only">Open main menu</span>
             {isOpen && (
-            <div className="md:hidden absolute top-full right-0 mt-2 w-56" style={{ backgroundColor: '#ece4c9' }}>
-              <Dropdown isSignedIn={isSignedIn} setIsSignedIn={setIsSignedIn} name={name} />
-            </div>
+              <div
+                className="md:hidden absolute top-full right-0 mt-2 w-56"
+                style={{ backgroundColor: "#ece4c9" }}
+              >
+                <Dropdown
+                  isSignedIn={isSignedIn}
+                  setIsSignedIn={setIsSignedIn}
+                  name={name}
+                />
+              </div>
             )}
           </a>
-          
-
         </div>
         {/* Search Bar*/}
         <div className="md:flex hidden relative ml-28 mr-8">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg
-                className="w-4 h-4 text-yellow-500 dark:text-yellow-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
-              <span className="sr-only">Search bar</span>
-            </div>
-            <input
-              type="text"
-              id="search-navbar"
-              className="block w-full p-2 ps-10 text-md text-yellow-900 border border-yellow-300 rounded-lg bg-yellow-50 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-black dark:border-yellow-600 dark:placeholder-yellow-600 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-              placeholder="Search..."
-            />
+          <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg
+              className="w-4 h-4 text-yellow-500 dark:text-yellow-400"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+              />
+            </svg>
+            <span className="sr-only">Search bar</span>
           </div>
-          <div className="flex items-center space-x-2">
+          <input
+                type="text"
+                id="search-navbar"
+                className="block w-full p-2 ps-10 text-md text-yellow-900 border border-yellow-300 rounded-lg bg-yellow-50 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-black dark:border-yellow-600 dark:placeholder-yellow-600 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                onClick={() => setsearchboxdropdown(true)}
+                onBlur={() => setsearchboxdropdown(false)}
+              />
+              {searchboxdropdown && (
+                <div className="absolute top-full right-0 mt-2 w-full rounded-lg bg-white shadow-lg p-4 z-50">
+                  <ul>
+                     {/* {searchResults.map(result => ( */}
+                      <li className="p-2 hover:bg-gray-200 cursor-pointer">HI</li>
+                      <li className="p-2 hover:bg-gray-200 cursor-pointer">HI</li>
+                    {/* ))} */} 
+                   
+                  </ul>
+                </div>
+              )}
+        
+      </div>
+        <div className="flex items-center space-x-2">
           {/* Journal Page*/}
           <a
             href="#"
@@ -178,13 +229,13 @@ const Navbar = ({ name }) => {
           </a>
           {/* Account Button */}
           <div className="relative inline-block text-left">
-          <a
-            href="#"
-            title="Account"
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:flex hidden hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
-          >
-            <img src={account} alt="" className="h-8 w-8" />
+            <a
+              href="#"
+              title="Account"
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:flex hidden hover:bg-white hover:rounded-full font-bold py-2 px-4 rounded flex items-center transition-transform transform hover:scale-105 hover:cursor-pointer"
+            >
+              <img src={account} alt="" className="h-8 w-8" />
             </a>
             {isOpen && (
               <Dropdown
