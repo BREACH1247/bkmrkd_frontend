@@ -26,8 +26,10 @@ const Account = () => {
           password: e.target.elements.password.value,
         }
       );
-      console.log("Sign up successful:", response.data);
+
       Cookies.set("jwt", response.data.data.token);
+      const decoded = jwtDecode(response.data.data.token);
+      localStorage.setItem("name", decoded.user.name);
 
       if (response.data.status === "success") {
         navigate("/");
@@ -48,13 +50,10 @@ const Account = () => {
           password: e.target.elements.password.value,
         }
       );
-      console.log("Sign in successful:", response.data);
 
       Cookies.set("jwt", response.data.data.token);
 
       const decoded = jwtDecode(response.data.data.token);
-
-      console.log(decoded.user.name);
 
       localStorage.setItem("name", decoded.user.name);
 
@@ -69,8 +68,8 @@ const Account = () => {
 
   return (
     <div className="container max-w-7xl mx-auto">
-      <div className="max-w-full grid grid-cols-1 md:grid-cols-[auto,1fr,auto] md:gap-4 items-center justify-between mx-auto py-4 my-1">
-        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+      <div className="max-w-full items-center justify-center py-4 my-1">
+        <a href="/" className="flex items-center justify-center space-x-3 rtl:space-x-reverse">
           <span className="self-auto text-4xl font-bold whitespace-nowrap dark:text-black">
             bkmrk'd
           </span>

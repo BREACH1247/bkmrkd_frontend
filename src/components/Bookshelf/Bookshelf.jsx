@@ -42,7 +42,7 @@ const Bookshelf = () => {
     stacks.push(temp);
   }
 
-  console.log(stacks);
+ 
 
   const StackText = ({ bookshelf, bookCount, isLocked }) => (
     <div

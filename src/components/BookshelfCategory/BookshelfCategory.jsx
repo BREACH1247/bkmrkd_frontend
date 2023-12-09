@@ -40,7 +40,7 @@ const BookshelfCategory = () => {
 
 	useEffect(() => {
 		if (data) {
-			console.log(data)
+			
 		}
 	}, [data])
 

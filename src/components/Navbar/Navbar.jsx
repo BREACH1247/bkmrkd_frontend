@@ -27,7 +27,7 @@ const Navbar = ({ name }) => {
         let config = {
           method: "get",
           maxBodyLength: Infinity,
-          url: `http://43.205.231.10:4000/api/books/search?q=${searchQuery}`,
+          url: `http://43.205.231.10:5000/api/books/search?q=${searchQuery}`,
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -35,7 +35,7 @@ const Navbar = ({ name }) => {
 
         const response = await axios(config);
 
-        console.log(response.data.data.books);
+       
         setSearchResults(response.data.data.books);
       } catch (error) {
         console.error("Error fetching data:", error);

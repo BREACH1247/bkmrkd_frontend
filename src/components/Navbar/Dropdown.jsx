@@ -9,13 +9,13 @@ const Dropdown = () => {
 				'http://43.205.231.10:4000/api/users/logout'
 			)
 
-			console.log('Sign out successful:', response.data)
-
+			
+			localStorage.removeItem('name')
 			Cookies.remove('jwt', { path: '/' })
 
 			window.location.href = '/account'
 		} catch (err) {
-			console.log(err)
+			
 		}
 	}
 	return (

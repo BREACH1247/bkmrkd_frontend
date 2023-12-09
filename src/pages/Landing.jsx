@@ -27,7 +27,7 @@ const Landing = () => {
         const response = await axios.get(
           `http://43.205.231.10:4000/api/bookshelves?page=1`
         );
-        console.log(response.data.data);
+       
         setNewdata(response.data.data.bookshelves);
       } catch (error) {
         console.error("Error fetching data:", error);

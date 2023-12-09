@@ -34,7 +34,7 @@ const BookPage = () => {
     const fetchData = async () => {
       const response = await fetch(`http://139.59.24.234:8000/api/${bookId}`);
       const data = await response.json();
-      console.log("Initial response data:", data); // Log the initial response data
+      // Log the initial response data
 
       if (data.data.recommended_books.length === 0) {
         await fetch("http://139.59.24.234:8000/api/", {
@@ -49,7 +49,7 @@ const BookPage = () => {
       const intervalId = setInterval(async () => {
         const response = await fetch(`http://139.59.24.234:8000/api/${bookId}`);
         const updatedData = await response.json();
-        console.log("Updated response data:", updatedData); // Log the updated response data
+       // Log the updated response data
 
         if (updatedData.data.recommended_books.length > 0) {
           setRecommendedBooks(updatedData.data.recommended_books);
@@ -63,7 +63,7 @@ const BookPage = () => {
 
   useEffect(() => {
     if (recommendedBooks.length > 0) {
-      console.log(recommendedBooks);
+      
       setLoading(false);
     }
   }, [recommendedBooks]);

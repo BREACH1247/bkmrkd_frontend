@@ -27,7 +27,7 @@ const RecommendedBooks = ({ recommendedBooks }) => {
 
     useEffect(() => {
       if(bookDetails) {
-        console.log(bookDetails);
+        
       }
     }, [bookDetails])
 

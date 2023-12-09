@@ -7,7 +7,7 @@ const Reviews = ({ bookId }) => {
 
   useEffect(() => {
     const fetchReviews = async () => {
-      console.log(bookId);
+     
       try {
         let config = {
           method: "get",
@@ -19,7 +19,7 @@ const Reviews = ({ bookId }) => {
         const response = await axios(config);
 
         setReviews(response.data.data.reviews);
-        console.log(response.data.data.reviews);
+        
       } catch (error) {
         console.error("Error fetching reviews:", error);
       }
