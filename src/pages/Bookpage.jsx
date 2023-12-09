@@ -6,14 +6,13 @@ import Navbar from "../components/Navbar/Navbar";
 import BookDescription from "../components/BookDescription/BookDescription";
 import Reviews from "../components/Reviews/Reviews";
 import RecommendedBooks from "../components/RecommendedBooks/RecommendedBooks";
-
+import heart from "../assets/heart.png";
 const BookPage = () => {
   const { bookId } = useParams();
   const [bookdata, setBookdata] = useState([]);
   const [loading, setLoading] = useState(true);
   const [recommendedBooks, setRecommendedBooks] = useState([]);
   const [reviews, setReviews] = useState([]);
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,47 +30,43 @@ const BookPage = () => {
     fetchData();
   }, [bookId]);
 
-useEffect(() => {
- const fetchData = async () => {
-    const response = await fetch(`http://139.59.24.234:8000/api/${bookId}`);
-    const data = await response.json();
-    console.log('Initial response data:', data); // Log the initial response data
-
-    if (data.data.recommended_books.length === 0) {
-      await fetch('http://139.59.24.234:8000/api/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ book_id: bookId }),
-      });
-    }
-
-
-    const intervalId = setInterval(async () => {
+  useEffect(() => {
+    const fetchData = async () => {
       const response = await fetch(`http://139.59.24.234:8000/api/${bookId}`);
-      const updatedData = await response.json();
-      console.log('Updated response data:', updatedData); // Log the updated response data
+      const data = await response.json();
+      console.log("Initial response data:", data); // Log the initial response data
 
-      if (updatedData.data.recommended_books.length > 0) {
-        setRecommendedBooks(updatedData.data.recommended_books);
-        clearInterval(intervalId);
+      if (data.data.recommended_books.length === 0) {
+        await fetch("http://139.59.24.234:8000/api/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ book_id: bookId }),
+        });
       }
-    }, 500);
- };
 
- fetchData();
-}, []);// Don't forget the dependency array!
+      const intervalId = setInterval(async () => {
+        const response = await fetch(`http://139.59.24.234:8000/api/${bookId}`);
+        const updatedData = await response.json();
+        console.log("Updated response data:", updatedData); // Log the updated response data
 
-useEffect(() => {
-  if (recommendedBooks.length > 0) {
-    console.log(recommendedBooks)
-    setLoading(false)
-  }
-}, [recommendedBooks])
+        if (updatedData.data.recommended_books.length > 0) {
+          setRecommendedBooks(updatedData.data.recommended_books);
+          clearInterval(intervalId);
+        }
+      }, 500);
+    };
 
+    fetchData();
+  }, []); // Don't forget the dependency array!
 
- 
+  useEffect(() => {
+    if (recommendedBooks.length > 0) {
+      console.log(recommendedBooks);
+      setLoading(false);
+    }
+  }, [recommendedBooks]);
 
   return (
     <div className="container max-w-7xl mx-auto">
@@ -90,6 +85,13 @@ useEffect(() => {
       )}
       <Reviews bookId={bookId} />
       {/* <h2>Book Page for Book ID: {bookId}</h2> */}
+      <br className="border-black border-t-2 mt-8" />
+      <div className="flex items-center justify-center mt-4">
+        <p className="mr-2 font-bold text-xl text-center pb-2">
+          Made with love
+        </p>
+        <img src={heart} alt="heart" className="w-8 h-8" />
+      </div>
     </div>
   );
 };

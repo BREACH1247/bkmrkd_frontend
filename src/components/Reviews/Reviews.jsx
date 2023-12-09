@@ -30,23 +30,27 @@ const Reviews = ({ bookId }) => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-center">Reviews</h2>
+      <h2 className="text-2xl font-bold text-center mt-8">Reviews</h2>
       <hr className="my-4 border-black border-t-2" />
       {reviews.length === 0 ? (
         <p className=" text-center font-semibold mt-4">
           No reviews available for this book.
         </p>
       ) : (
-        reviews.map((review) => (
+        reviews.map((review, index) => (
           <div key={review.id} className="mb-4">
+            <div className="flex justify-between items-center">
+              <p className="font-bold mb-2 text-3xl">{review.user.name}</p>
+              <p>{new Date(review.createdAt).toLocaleDateString()}</p>
+            </div>
             <div className="flex items-center">
-              <p className="font-medium">{review.name}</p>
-              <div className="flex items-center mr-2">
-                <span className="mr-2 font-semibold">{review.rating}</span>
-                <img src={star} alt="star" className="w-5 h-5" />
+              <div className="flex items-center mr-2 text-2xl">
+                {review.rating}
+                <img src={star} alt="star" className="ml-2 w-6 h-6 mb-2" />
               </div>
             </div>
-            <p>{review.content}</p>
+            <p className="text-xl">{review.content}</p>
+            {index !== reviews.length - 1 && <hr className="mt-4 border-gray-700"/>}
           </div>
         ))
       )}

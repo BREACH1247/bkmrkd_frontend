@@ -3,6 +3,7 @@ import add from '../assets/add.png'
 import cluster from '../assets/cluster.png'
 import search from '../assets/search.png'
 import hand from '../assets/hand.png'
+import heart from '../assets/heart.png'
 import Navbar from '../components/Navbar/Navbar'
 import Bookshelf from '../components/Bookshelf/Bookshelf'
 
@@ -41,6 +42,13 @@ const Library = () => {
 				
 				<Bookshelf />
 			</div>
+			<br className="border-black border-t-2 mt-8" />
+      <div className="flex items-center justify-center mt-4">
+        <p className="mr-2 font-bold text-xl text-center pb-2">
+          Made with love
+        </p>
+        <img src={heart} alt="heart" className="w-8 h-8" />
+      </div>
 		</div>
 	)
 }
