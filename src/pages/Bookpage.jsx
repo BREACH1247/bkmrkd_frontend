@@ -19,7 +19,7 @@ const BookPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://43.205.231.10:5000/api/books/${bookId}`
+          `http://43.205.231.10:4000/api/books/${bookId}`
         );
 
         setBookdata(response.data.data.book);
@@ -31,20 +31,20 @@ const BookPage = () => {
     fetchData();
   }, [bookId]);
   
- useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await axios.get(`http://43.205.231.10:5000/api/reviews/book/${bookId}`); 
+//  useEffect(() => {
+//     const fetchReviews = async () => {
+//       try {
+//         const response = await axios.get(`http://43.205.231.10:4000/api/reviews/book/${bookId}`); 
         
-          setReviews(response.data.data.reviews);
-          console.log(response.data.data.reviews); 
-      } catch (error) {
-        console.error(error);
-      }
-    };
+//           setReviews(response.data.data.reviews);
+//           console.log(response.data.data.reviews); 
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     };
   
-    fetchReviews();
-  }, [bookId]);
+//     fetchReviews();
+//   }, [bookId]);
 
 useEffect(() => {
  const fetchData = async () => {
@@ -103,7 +103,7 @@ useEffect(() => {
       ) : (
         <RecommendedBooks recommendedBooks={recommendedBooks} />
       )}
-      <Reviews reviews={reviews} />
+      <Reviews bookId={bookId} />
       <h2>Book Page for Book ID: {bookId}</h2>
     </div>
   );

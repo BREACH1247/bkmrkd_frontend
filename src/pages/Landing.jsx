@@ -24,7 +24,7 @@ const Landing = () => {
 		const fetchData = async () => {
 			try {
 				const response = await axios.get(
-					`http://43.205.231.10:5000/api/bookshelves?page=1`
+					`http://43.205.231.10:4000/api/bookshelves?page=1`
 				)
 				console.log(response.data.data)
 				setNewdata(response.data.data.bookshelves)

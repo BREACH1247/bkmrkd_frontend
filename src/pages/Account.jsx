@@ -18,7 +18,7 @@ const Account = () => {
 		e.preventDefault()
 		try {
 			const response = await axios.post(
-				'http://43.205.231.10:5000/api/users/signup',
+				'http://43.205.231.10:4000/api/users/signup',
 				{
 					name: e.target.elements.name.value,
 					email: e.target.elements.email.value,
@@ -41,7 +41,7 @@ const Account = () => {
 		e.preventDefault()
 		try {
 			const response = await axios.post(
-				'http://43.205.231.10:5000/api/users/login',
+				'http://43.205.231.10:4000/api/users/login',
 				{
 					email: e.target.elements.email.value,
 					password: e.target.elements.password.value,

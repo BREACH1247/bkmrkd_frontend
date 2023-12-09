@@ -6,7 +6,7 @@ const Dropdown = () => {
 	const handleSignOut = async () => {
 		try {
 			const response = await axios.post(
-				'http://43.205.231.10:5000/api/users/logout'
+				'http://43.205.231.10:4000/api/users/logout'
 			)
 
 			console.log('Sign out successful:', response.data)

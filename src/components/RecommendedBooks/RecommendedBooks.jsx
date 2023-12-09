@@ -10,7 +10,7 @@ const RecommendedBooks = ({ recommendedBooks }) => {
       const fetchBookDetails = async () => {
         try {
           const detailsPromises = recommendedBooks.map(async (bookId) => {
-            const response = await axios.get(`http://43.205.231.10:5000/api/books/${bookId}`);
+            const response = await axios.get(`http://43.205.231.10:4000/api/books/${bookId}`);
             return response.data.data.book;
           });
   

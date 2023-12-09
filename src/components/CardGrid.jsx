@@ -11,7 +11,7 @@ const CardGrid = () => {
 		const fetchData = async () => {
 			try {
 				const response = await axios.get(
-					`http://43.205.231.10:5000/api/books?page=${page}`
+					`http://43.205.231.10:4000/api/books?page=${page}`
 				)
 				setNewdata((prev) => [...prev, ...response.data.data.books])
 			} catch (error) {
