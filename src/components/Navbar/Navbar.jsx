@@ -27,15 +27,14 @@ const Navbar = ({ name }) => {
         let config = {
           method: "get",
           maxBodyLength: Infinity,
-          url: `http://43.205.231.10:5000/api/books/search?q=${searchQuery}`,
+          url: `http://43.205.231.10:4000/api/books/search?q=${searchQuery}`,
           headers: {
             Authorization: `Bearer ${token}`,
           },
         };
 
         const response = await axios(config);
-
-       
+        
         setSearchResults(response.data.data.books);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -159,7 +158,7 @@ const Navbar = ({ name }) => {
             <input
               type="text"
               id="search-navbar"
-              className="block w-full p-2 ps-10 text-md border text-white border-yellow-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500 bg-stone-900 placeholder-yellow-600"
+              className="block w-full p-2 ps-10 text-md border  text-white border-yellow-300 rounded-lg focus:ring-yellow-500 focus:border-yellow-500 bg-stone-900 placeholder-yellow-600"
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
