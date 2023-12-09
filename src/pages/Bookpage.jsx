@@ -8,11 +8,14 @@ import Reviews from "../components/Reviews/Reviews";
 import RecommendedBooks from "../components/RecommendedBooks/RecommendedBooks";
 import heart from "../assets/heart.png";
 const BookPage = () => {
+  
   const { bookId } = useParams();
   const [bookdata, setBookdata] = useState([]);
   const [loading, setLoading] = useState(true);
   const [recommendedBooks, setRecommendedBooks] = useState([]);
   const [reviews, setReviews] = useState([]);
+  
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +32,7 @@ const BookPage = () => {
 
     fetchData();
   }, [bookId]);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`http://139.59.24.234:8000/api/${bookId}`);

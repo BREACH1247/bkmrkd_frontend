@@ -171,9 +171,15 @@ const Navbar = ({ name }) => {
               <ul>
                 {searchResults.slice(0, 5).map((result) => (
                   <Link to={`/books/${result.book_id}`} key={result.book_id}>
-                    <li className="p-2 hover:bg-gray-200 cursor-pointer">
+                    
+                    <li 
+                      key={result.book_id}
+                      className="p-2 hover:bg-gray-200 cursor-pointer"
+                      onClick={() => window.location.href = `/books/${result.book_id}`}
+                    >
                       {result.title_without_series}
                     </li>
+                    
                   </Link>
                 ))}
               </ul>
