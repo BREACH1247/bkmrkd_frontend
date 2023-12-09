@@ -9,8 +9,14 @@ const RecommendedBooks = ({ recommendedBooks }) => {
    useEffect(() => {
       const fetchBookDetails = async () => {
         try {
-            const response = await axios.get(`http://43.205.231.10:5000/api/books/31708384`);
-            setBookDetails(response);
+          const detailsPromises = recommendedBooks.map(async (bookId) => {
+            const response = await axios.get(`http://43.205.231.10:5000/api/books/${bookId}`);
+            return response.data.data.book;
+          });
+  
+          const details = await Promise.all(detailsPromises);
+  
+          setBookDetails(details);
         } catch (error) {
           console.error('Error fetching book details:', error);
         }

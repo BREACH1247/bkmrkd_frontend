@@ -12,6 +12,8 @@ const BookPage = () => {
   const [bookdata, setBookdata] = useState([]);
   const [loading, setLoading] = useState(true);
   const [recommendedBooks, setRecommendedBooks] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +31,20 @@ const BookPage = () => {
     fetchData();
   }, [bookId]);
   
+ useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get(`http://43.205.231.10:5000/api/reviews/book/${bookId}`); 
+        
+          setReviews(response.data.data.reviews);
+          console.log(response.data.data.reviews); 
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchReviews();
+  }, [bookId]);
 
 useEffect(() => {
  const fetchData = async () => {
@@ -45,6 +61,7 @@ useEffect(() => {
         body: JSON.stringify({ book_id: bookId }),
       });
     }
+
 
     const intervalId = setInterval(async () => {
       const response = await fetch(`http://139.59.24.234:8000/api/${bookId}`);
@@ -69,6 +86,8 @@ useEffect(() => {
 }, [recommendedBooks])
 
 
+ 
+
   return (
     <div className="container max-w-7xl mx-auto">
       <Navbar />
@@ -84,7 +103,7 @@ useEffect(() => {
       ) : (
         <RecommendedBooks recommendedBooks={recommendedBooks} />
       )}
-      <Reviews page={bookId}/>
+      <Reviews reviews={reviews} />
       <h2>Book Page for Book ID: {bookId}</h2>
     </div>
   );
